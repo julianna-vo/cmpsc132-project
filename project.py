@@ -3,46 +3,82 @@
 import random
 
 def number_guessing_game():
-    target_number = random.randint(1,100) # Generate a random number from 1 to 100 and label it as the target number
-    correct_guess = False # Create a correct_guess variable and set it to a bool value of False since user has not correctly guessed the number yet
-    num_attempts = 0 # Set intialization variable to 0 to track number of attempts user makes to guess target number
 
+    # Introduction statement
     print("Hello and Welcome to the Number Guessing Game!")
 
-    while not correct_guess:
-        try:
-            user_guess = int(input("Guess the number: ")) # Have user input their guess
-            num_attempts += 1 # Increment num_attempts by 1 
+    # Player gets to choose the difficulty mode
+    print("\n Select a difficulty mode!")
+    print(" 1. Easy Mode: Target number rangers from 1-50, unlimited guesses, hint given after each guess")
+    print(" 2. Medium Mode: Target number rangers from 1-100, 20 guesses, hint given after each guess")
+    print(" 3. Difficult Mode: Target number rangers from 1-200, 10 guesses, no hints given")
 
-        except ValueError:
-            print("Your guess should be a valid digit!") # Ensure that user input only contains digits
+    while True: 
+        difficulty = input ("\n Enter 1, 2, or 3 ").strip()
 
-            if user_guess > target_number: # Feedback given if user's guess is too high from target number
-                print("Too High")
+        if difficulty == "1":
+            low, high, max_attempts, hints_on = 1,50, float('inf'), True
+            print("You're on Easy Mode! Take it easy!")
+
+        elif difficulty == "2":
+            low, high, max_attempts, hints_on = 1,100, 20, True
+            print("You're on Medium Mode! A little more challenging!")
+
+        elif difficulty == "3":
+            low, high, max_attempts, hints_on = 1,200, 10, False
+            print("You're on Hard Mode! Game on!")
+        
+        else:
+            print("Please enter 1, 2, or 3!")
+
+        target_number = random.randint(low, high) # Generate a random number from 1 to 100 and label it as the target number
+        correct_guess = False # Create a correct_guess variable and set it to a bool value of False since user has not correctly guessed the number yet
+        num_attempts = 0 # Set intialization variable to 0 to track number of attempts user makes to guess target number
+        guess_history = []
+
+        while not correct_guess:
+            
+            if max_attempts != float('inf'): # Scenario if max_attempts aren't unlimited, keep track of remaining attempts for user
+                remaining_attempts = max_attempts - num_attempts
+                print(f"You have {remaining_attempts} left to guess!")
+
+            try:
+                user_guess = int(input("Guess the number: ")) # Have user input their guess
+                num_attempts += 1 # Increment num_attempts by 1 
+
+            except ValueError:
+                print("Your guess should be a valid digit!") # Ensure that user input only contains digits
+
+                if user_guess > target_number: # Feedback given if user's guess is too high from target number
+                    print("Too High")
+                    
+
+                elif user_guess < target_number: # Feedback given if user's guess is too low from target number
+                    print("Too Low")
+
+                if (user_guess > target_number) or (user_guess < target_number): # Give hints to whether target number is even or odd only if hints_on (EASY OR MEDIUM MODE)
+                    if hints_on:
+                        if target_number % 2 == 0:
+                            print("HINT: The target number is even...")
+
+                        if target_number % 2 != 0:
+                            print("HINT: The target number is odd...")
+
+                else: # Scenario if user correctly guesses the target number correctly
+                    print("Correct!")
+                    print(f"Congratulations! You guessed the correct number in {num_attempts} attempts!")
+                    correct_guess = True
+
+                    # Display a history log of user's attempts
+                    print("Let's look at your attempts!")
                 
+                if not correct_guess and remaining_attempts == 0:
+                    print(f"You're out of attempts! Game over!")
 
-            elif user_guess < target_number: # Feedback given if user's guess is too low from target number
-                print("Too Low")
-
-            if user_guess > target_number or user_guess < target_number: # Give hints to whether target number is even or odd
-
-                if target_number % 2 == 0:
-                    print("HINT: The target number is even...")
-
-                if target_number % 2 != 0:
-                    print("HINT: The target number is odd...")
-
-            else: # Scenario if user correctly guesses the target number correctly
-                print("Correct!")
-                print(f"Congratulations! You guessed the correct number in {num_attempts} attempts!")
-                correct_guess = True
-
-                # Display a history log of user's attempts
-                print("Let's look at your attempts!")
-
+                guess_history.append((num_attempts, user_guess)) # Keep track of user's guess history
 """
 Extra implementations:
-- Give hints for user after each incorrect guess
+- Give hints for user after each incorrect guess (states if target number is even or odd)
 - Create certain difficulty modes 
 - Display a history summary at the end to display all of user's previous guesses
 - More interactive comments for feedback for user 

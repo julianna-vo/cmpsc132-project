@@ -19,21 +19,32 @@ def number_guessing_game():
 
             if user_guess > target_number: # Feedback given if user's guess is too high from target number
                 print("Too High")
+                
 
             elif user_guess < target_number: # Feedback given if user's guess is too low from target number
                 print("Too Low")
+
+            if user_guess > target_number or user_guess < target_number: # Give hints to whether target number is even or odd
+
+                if target_number % 2 == 0:
+                    print("HINT: The target number is even...")
+
+                if target_number % 2 != 0:
+                    print("HINT: The target number is odd...")
 
             else: # Scenario if user correctly guesses the target number correctly
                 print("Correct!")
                 print(f"Congratulations! You guessed the correct number in {num_attempts} attempts!")
                 correct_guess = True
 
+                # Display a history log of user's attempts
+                print("Let's look at your attempts!")
 
 """
 Extra implementations:
 - Give hints for user after each incorrect guess
-- Create certain difficulty modes
+- Create certain difficulty modes 
 - Display a history summary at the end to display all of user's previous guesses
-- More interactive comments
+- More interactive comments for feedback for user 
 
 """ 

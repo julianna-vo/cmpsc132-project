@@ -14,9 +14,9 @@ def number_guessing_game():
     print(" 3. Difficult Mode: Target number rangers from 1-200, 10 guesses, no hints given")
 
     while True: 
-        difficulty = input ("\n Enter 1, 2, or 3: ").strip()
+        difficulty = input ("\nEnter 1, 2, or 3: ").strip()
 
-        if difficulty == "1":
+        if difficulty == "1": 
             low, high, max_attempts, hints_on = 1,50, float('inf'), True
             print("You're on Easy Mode! Take it easy!")
             break

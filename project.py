@@ -103,6 +103,7 @@ Extra implementations:
 - Display a history summary at the end to display all of user's previous guesses
 - Tell user how many attempts they have left after each guess
 - Implement a "play again" to reset the game again if the user wishes to 
+
 """ 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def main():

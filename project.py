@@ -67,7 +67,7 @@ def number_guessing_game():
                     print("HINT: The target number is even...")
 
                 if target_number % 2 != 0:
-                            print("HINT: The target number is odd...")
+                    print("HINT: The target number is odd...")
 
         else: # Scenario if user correctly guesses the target number correctly
             print("\nCorrect!")
@@ -97,4 +97,5 @@ Extra implementations:
 - Create certain difficulty modes (EASY, MEDIUM, HARD)
 - Display a history summary at the end to display all of user's previous guesses
 - Tell user how many attempts they have left after each guess
+- Implement a "play again" to reset the game again if the user wishes to 
 """ 
